@@ -14,12 +14,12 @@
 
 #define MAX 1024
 
-typedef struct {
-    enum { japanese , western } poem_type; // same with signal type for now
-    char poem_text[MAX];
-    char poem_author[MAX];
-    long poem_sig_type;
-} Poem;
+// typedef struct {
+//     enum { japanese , western } poem_type; // same with signal type for now
+//     char poem_text[MAX];
+//     char poem_author[MAX];
+//     long poem_sig_type;
+// } Poem;
 
 
 // function declaration in client.c

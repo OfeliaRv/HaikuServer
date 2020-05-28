@@ -3,6 +3,7 @@
 
 #include "poem.h"
 
+
 int access_queue() // access queue using unique key
 {
     key_t key = ftok("/etc/passwd", 'E');
@@ -17,7 +18,7 @@ int access_queue() // access queue using unique key
 
 void write_value(int id, char *text) // function to add message to the queue
 {
-    Poem p;
+    // Poem p;
     int r;
     p.poem_sig_type = 25;
     strcpy(p.poem_text, text);
@@ -29,42 +30,8 @@ void write_value(int id, char *text) // function to add message to the queue
 
 int main()
 {
-    char japanese_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt"};
-    char western_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt", "7.txt", "8.txt"};
-    int category_num;
-
-    for (int i = 0; i < 100; i++)
-    {
-        // category_num = r2();
-        // kill(getpid(), rand(SIGINT, SIGQUIT);
-        if (category_num == 0)
-        {
-            char ch;
-            char haiku[100];
-            strcpy(haiku, japanese_haikus[0]);
-            char path[20] = "japanese/";
-            FILE *fp = fopen(strcat(path, haiku), "r");
-            while ((ch = fgetc(fp)) != EOF)
-            {
-                printf("%c", ch);
-            }
-            printf("\n");
-        }
-        else if (category_num == 1)
-        {
-            char ch;
-            char haiku[100];
-            strcpy(haiku, western_haikus[0]);
-            char path[20] = "western/";
-            FILE *fp = fopen(strcat(path, haiku), "r");
-            while ((ch = fgetc(fp)) != EOF)
-            {
-                printf("%c", ch);
-            }
-            printf("\n");
-        }
-        sleep(1);
-    }
+    char category_num[] = { SIGINT , SIGQUIT};
+    char category = category_num[rand() % sizeof(sizeof((category_num)) / sizeof((category_num[0])))];
 
     return 0;
 }
