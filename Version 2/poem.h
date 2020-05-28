@@ -6,31 +6,34 @@
 #include <string.h>
 #include <sys/ipc.h>
 #include <stdlib.h>
+
 #include <signal.h> 
 #include <sys/types.h> 
 #include <unistd.h> 
 #include <time.h>
-#include <stdlib.h>
 
 #define MAX 1024
 
-// typedef struct {
-//     enum { japanese , western } poem_type; // same with signal type for now
-//     char poem_text[MAX];
-//     char poem_author[MAX];
-//     long poem_sig_type;
-// } Poem;
 
+struct poem
+{
+    long msg_type;
+    int category;
+};
 
-// function declaration in client.c
-// void sigint();
-// void sigquit();
-void choose_signal(int num);
-// int r2();
+// function declaration in writer.c
+int access_queue();
+void write_value(int id, int category);
+int r2();
 
-// function declaration in server.c
+// function declaration in reader.c
 int create_queue();
 void remove_queue(int id);
-char read_value (int id);
+struct poem read_value(int id);
+void read_haiku(int category);
+int r6();
+int r8();
+
+
 
 #endif
