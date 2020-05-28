@@ -24,6 +24,7 @@ struct poem
 // function declaration in client.c
 int access_queue();
 void write_value(int id, int signal);
+void signal_handler(int signal);
 
 // function declaration in server.c
 int create_queue();

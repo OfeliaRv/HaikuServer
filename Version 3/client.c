@@ -3,24 +3,6 @@
 
 #include "poem.h"
 
-void signal_handler(int signal)
-{
-    int poem_id = access_queue();
-    /* Display a message indicating we have received a signal */
-    if (signal == SIGINT)
-    {
-        printf("\nSend a SIGINT signal to server.\n");
-        write_value(poem_id, SIGINT);
-    }
-    else if (signal == SIGQUIT)
-    {
-        printf("\nSend a SIGQUIT signal to server.\n");
-        write_value(poem_id, SIGQUIT);
-    }
-    exit(1);
-}
-
-
 int main()
 {
     if (signal(SIGINT, signal_handler) == SIG_ERR)
@@ -60,4 +42,21 @@ void write_value(int id, int signal) // function to add message to the queue
     r = msgsnd(id, &p, sizeof p - sizeof p.msg_type, 0); // Data is placed on to a message queue
     if (r == -1)
         perror("msgsnd");
+}
+
+void signal_handler(int signal)
+{
+    int poem_id = access_queue();
+    /* Display a message indicating we have received a signal */
+    if (signal == SIGINT)
+    {
+        printf("\nSend a SIGINT signal to server.\n");
+        write_value(poem_id, SIGINT);
+    }
+    else if (signal == SIGQUIT)
+    {
+        printf("\nSend a SIGQUIT signal to server.\n");
+        write_value(poem_id, SIGQUIT);
+    }
+    exit(1);
 }
