@@ -2,28 +2,29 @@
 
 int main()
 {
+    
     int poem_id = create_queue();
     struct poem p;
-    p = read_value(poem_id);
-    printf("Main queue read.");
+    for (int i = 1; i <= 100; i++)
+    {
+        p = read_value(poem_id);
+        // printf("Main queue read.");
 
-    // kill(getpid(), rand(SIGINT, SIGQUIT);
-    // for (int i = 0; i < 100; i++)
-    // {
-        if (p.mtext == 1)
+        // kill(getpid(), rand(SIGINT, SIGQUIT);
+
+        if (p.mtext == 2)
         {
-            printf("\nServer recieves Japanese\n");
+            printf("\n[%d]: Server recieves Japanese\n", i);
         }
-        else if (p.mtext == 2)
+        else if (p.mtext == 3)
         {
-            printf("\nServer recieves Western\n");
+            printf("\n[%d]: Server recieves Western\n", i);
         }
-        // sleep(1);
-    // }
+        // sleep(2);
+    }
     printf("Main class accessed. Server was stopped.\n");
     remove_queue(poem_id);
     return 0;
-
 }
 
 int create_queue()
@@ -52,7 +53,7 @@ struct poem read_value(int id)
 {
     struct poem p;
     int r;
-    r = msgrcv(id, &p, sizeof p - sizeof p.msg_type , 25, 0); //message is retrieved from a queue
+    r = msgrcv(id, &p, sizeof p - sizeof p.msg_type, 25, 0); //message is retrieved from a queue
     if (r == -1)
         perror("msgrcv");
     return p;
