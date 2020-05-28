@@ -3,25 +3,24 @@
 int main()
 {
     int poem_id = create_queue();
-    printf("my id is %d \n", poem_id);
-
-    int category = read_value(poem_id);
+    struct poem p;
+    p = read_value(poem_id);
     printf("Main queue read.");
 
     // kill(getpid(), rand(SIGINT, SIGQUIT);
     // for (int i = 0; i < 100; i++)
     // {
-        if (category == 1)
+        if (p.mtext == 1)
         {
-            printf("japanese\n");
+            printf("\nServer recieves Japanese\n");
         }
-        else if (category == 2)
+        else if (p.mtext == 2)
         {
-            printf("western\n");
+            printf("\nServer recieves Western\n");
         }
         // sleep(1);
     // }
-    printf("Main class accessed. Server was stopped.");
+    printf("Main class accessed. Server was stopped.\n");
     remove_queue(poem_id);
     return 0;
 
@@ -37,7 +36,6 @@ int create_queue()
     if (msg_id == -1)
         perror("msgget");
     printf("Queue created\n");
-    printf("myyyyyyyyy id is %d \n", msg_id);
     return msg_id;
 }
 
@@ -50,17 +48,12 @@ void remove_queue(int id)
     printf("Queue removed\n");
 }
 
-int read_value(int id)
+struct poem read_value(int id)
 {
-    printf("i entered.");
-
+    struct poem p;
     int r;
-    int category;
-    r = msgrcv(id, &category, sizeof(category) , 25, 0); //message is retrieved from a queue
-    printf("i recieved.");
+    r = msgrcv(id, &p, sizeof p - sizeof p.msg_type , 25, 0); //message is retrieved from a queue
     if (r == -1)
         perror("msgrcv");
-    printf("%d\n", category);
-
-    return category;
+    return p;
 }

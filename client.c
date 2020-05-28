@@ -16,10 +16,11 @@ int access_queue() // access queue using unique key
 
 void write_value(int id, int category) // function to add message to the queue
 {
-    // Poem p;
+    struct poem p;
+    p.msg_type = 25;
+    p.mtext=category;
     int r;
-    int poem_sig_type = 25;
-    r = msgsnd(id, &category, sizeof(category), 0); // Data is placed on to a message queue
+    r = msgsnd(id, &p, sizeof p - sizeof p.msg_type, 0); // Data is placed on to a message queue
     if (r == -1) perror("msgsnd");
 }
 
@@ -32,11 +33,11 @@ int r2()
 
 int main()
 {
+    struct poem p;
     int poem_id = access_queue();
     int category = r2();
-    printf("i choose %d \n" , category);
+    printf("Client sends %d \n" , category);
     write_value(poem_id, category);
-    printf("i wrote %d \n" , category);
 
 
     return 0;
