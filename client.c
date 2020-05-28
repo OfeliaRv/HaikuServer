@@ -3,68 +3,68 @@
 
 #include "poem.h"
 
-int access_queue()  // access queue using unique key
+int access_queue() // access queue using unique key
 {
-    key_t key = ftok ("/etc/passwd", 'E') ;
-    if (key == -1) perror ("ftok");
+    key_t key = ftok("/etc/passwd", 'E');
+    if (key == -1)
+        perror("ftok");
     int poem_sig_id = msgget(key, 0);
-    if (poem_sig_id == -1) perror("msgget");
+    if (poem_sig_id == -1)
+        perror("msgget");
 
     return poem_sig_id;
 }
 
-void write_value(int id, char* text)  // function to add message to the queue
+void write_value(int id, char *text) // function to add message to the queue
 {
-    Poem p; 
+    Poem p;
     int r;
     p.poem_sig_type = 25;
     strcpy(p.poem_text, text);
 
-    r = msgsnd (id , &p, sizeof p - sizeof p.poem_sig_type , 0);     // Data is placed on to a message queue
-    if (r == -1) perror("msgsnd");
+    r = msgsnd(id, &p, sizeof p - sizeof p.poem_sig_type, 0); // Data is placed on to a message queue
+    if (r == -1)
+        perror("msgsnd");
 }
 
 int main()
 {
-    int pid;
-    int num;
-    /* get child process */
-    if ((pid = fork()) < 0)
-    {
-        perror("fork");
-        exit(1);
-    }
+    char japanese_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt"};
+    char western_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt", "7.txt", "8.txt"};
+    int category_num;
+
     for (int i = 0; i < 100; i++)
     {
-        if (pid == 0)
-        { /* child */
-
-            num = r2();
-            if (num == 0)
+        category_num = r2();
+        if (category_num == 0)
+        {
+            char ch;
+            char haiku[100];
+            strcpy(haiku, japanese_haikus[0]);
+            char path[20] = "japanese/";
+            FILE *fp = fopen(strcat(path, haiku), "r");
+            while ((ch = fgetc(fp)) != EOF)
             {
-                sigint();
+                printf("%c", ch);
             }
-            else if (num == 1)
+            printf("\n");
+        }
+        else if (category_num == 1)
+        {
+            char ch;
+            char haiku[100];
+            strcpy(haiku, western_haikus[0]);
+            char path[20] = "western/";
+            FILE *fp = fopen(strcat(path, haiku), "r");
+            while ((ch = fgetc(fp)) != EOF)
             {
-                sigquit();
+                printf("%c", ch);
             }
+            printf("\n");
         }
-        //  for (;;)
-        //     ; /* loop for ever */
-
-        else /* parent */
-        {    /* pid hold id of child */
-
-            sleep(1); /* pause for 1 sec */
-            printf("\nPARENT: sending SIGINT\n\n");
-            kill(pid, SIGINT);
-
-            sleep(1); /* pause for 1 sec */
-            printf("\nPARENT: sending SIGQUIT\n\n");
-            kill(pid, SIGQUIT);
-            sleep(1);
-        }
+        sleep(1);
     }
+
     return 0;
 }
 

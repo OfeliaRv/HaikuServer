@@ -10,6 +10,7 @@
 #include <sys/types.h> 
 #include <unistd.h> 
 #include <time.h>
+#include <stdlib.h>
 
 #define MAX 1024
 
@@ -30,6 +31,6 @@ int r2();
 // function declaration in server.c
 int create_queue();
 void remove_queue(int id);
-Poem read_value (int id);
+// Poem read_value (int id);
 
 #endif
