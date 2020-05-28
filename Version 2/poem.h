@@ -14,6 +14,13 @@
 
 #define MAX 1024
 
+// typedef struct {
+//     enum { japanese , western } poem_type; // same with signal type for now
+//     char poem_text[MAX];
+//     char poem_author[MAX];
+//     long poem_sig_type;
+// } Poem;
+
 
 // function declaration in client.c
 // void sigint();
@@ -24,5 +31,6 @@ void choose_signal(int num);
 // function declaration in server.c
 int create_queue();
 void remove_queue(int id);
+char read_value (int id);
 
 #endif
