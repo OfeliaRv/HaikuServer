@@ -10,8 +10,6 @@ int main()
         p = read_value(poem_id);
         // printf("Main queue read.");
 
-        // kill(getpid(), rand(SIGINT, SIGQUIT);
-
         if (p.mtext == 2)
         {
             printf("\n[%d]: Server recieves Japanese\n", i);
