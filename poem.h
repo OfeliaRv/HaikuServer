@@ -23,10 +23,10 @@ typedef struct {
 
 
 // function declaration in client.c
-void sigint();
-void sigquit();
+// void sigint();
+// void sigquit();
 void choose_signal(int num);
-int r2();
+// int r2();
 
 // function declaration in server.c
 int create_queue();

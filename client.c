@@ -35,7 +35,8 @@ int main()
 
     for (int i = 0; i < 100; i++)
     {
-        category_num = r2();
+        // category_num = r2();
+        // kill(getpid(), rand(SIGINT, SIGQUIT);
         if (category_num == 0)
         {
             char ch;
@@ -68,20 +69,20 @@ int main()
     return 0;
 }
 
-void sigint()
-{
-    signal(SIGINT, sigint); /* reset signal */
-    printf("CHILD: I have received a SIGINT\n");
-}
+// void sigint()
+// {
+//     signal(SIGINT, sigint); /* reset signal */
+//     printf("CHILD: I have received a SIGINT\n");
+// }
 
-void sigquit()
-{
-    printf("My DADDY has Killed me!!!\n");
-    exit(0);
-}
+// void sigquit()
+// {
+//     printf("My DADDY has Killed me!!!\n");
+//     exit(0);
+// }
 
-int r2()
-{
-    srand(time(NULL));
-    return (rand() % 2);
-}
+// int r2()
+// {
+//     srand(time(NULL));
+//     return (rand() % 2);
+// }
