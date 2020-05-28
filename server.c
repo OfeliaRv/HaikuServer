@@ -4,7 +4,7 @@ int main()
 {
     char japanese_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt"};
     char western_haikus[100][100] = {"1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt", "7.txt", "8.txt"};
-    char category_num[] = { SIGINT , SIGQUIT};
+    char category_num[] = {SIGINT, SIGQUIT};
     int my_poem_id = create_queue();
     // Poem p[MAX]; //messages stored to an array
     // int count = 100;
@@ -16,11 +16,12 @@ int main()
 
     // printf("Main class accessed. Server was stopped.");
     // remove_queue(my_poem_id);
-
+    int poem_id = create_queue();
+    char category = read_value(poem_id);
+    // category_num = r2();
+    // kill(getpid(), rand(SIGINT, SIGQUIT);
     for (int i = 0; i < 100; i++)
     {
-        // category_num = r2();
-        // kill(getpid(), rand(SIGINT, SIGQUIT);
         if (category == SIGINT)
         {
             char ch;
@@ -54,7 +55,7 @@ int main()
 
 int create_queue()
 {
-    key_t key = ftok("/etc/passwd", 'E'); // generating a unique key
+    key_t key = ftok("server.c", 'E'); // generating a unique key
     if (key == -1)
         perror("ftok");
 
@@ -75,13 +76,15 @@ void remove_queue(int id)
     printf("Queue removed\n");
 }
 
-// Poem read_value(int id)
-// {
-//     Poem p;
-//     int r;
-//     r = msgrcv(id, &p, sizeof p - sizeof p.poem_type, 25, 0); //message is retrieved from a queue
-//     if (r == -1)
-//         perror("msgrcv");
-//     printf("%s\n", p.poem_text);
-//     return p;
-// }
+char read_value(int id)
+{
+    int r;
+    char category;
+    int poem_type = 25;
+    r = msgrcv(id, &category, sizeof category - sizeof poem_type, 25, 0); //message is retrieved from a queue
+    if (r == -1)
+        perror("msgrcv");
+    printf("%c\n", category);
+
+    return category;
+}

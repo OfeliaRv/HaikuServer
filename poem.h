@@ -31,6 +31,6 @@ void choose_signal(int num);
 // function declaration in server.c
 int create_queue();
 void remove_queue(int id);
-// Poem read_value (int id);
+char read_value (int id);
 
 #endif
