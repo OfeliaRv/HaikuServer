@@ -1,20 +1,17 @@
-// C program to implement sighup(), sigint()
-// and sigquit() signal functions
-
 #include "poem.h"
 
 int main()
 {
     int arr[2] = { SIGINT , SIGQUIT };
     struct poem p;
-    int poem_id = access_queue();
+    int poem_id = access_queue(); 
     
     for (int i = 1; i <= 100; i++)
     {
-        int n = r2();
+        int n = r2();   // generating random array index between 0 and 1
         int category = arr[n];
         printf("Client sends [%d]: %d \n", i, category);
-        write_value(poem_id, category);
+        write_value(poem_id, category);  // writing to the queue, sends to server 
         sleep(1);
     }
 
@@ -44,7 +41,7 @@ void write_value(int id, int category) // function to add message to the queue
         perror("msgsnd");
 }
 
-int r2()
+int r2()  // generates random value between 0 and 1
 {
     srand(clock());
     return (rand() % 2);

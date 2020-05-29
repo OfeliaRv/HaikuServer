@@ -2,24 +2,23 @@
 
 int main()
 {
-    
-    int poem_id = create_queue();
+    int poem_id = create_queue();  // creating queue and assigning its id value
     struct poem p;
-    for (int i = 1; i <= 100; i++)
+    for (int i = 1; i <= 100; i++)  // receiving 100 messages from client
     {
         p = read_value(poem_id);
 
-        if (p.mtext == 2)
+        if (p.mtext == 2)   // if SIGINT
         {
             printf("\n[%d]: Server recieves Japanese\n", i);
         }
-        else if (p.mtext == 3)
+        else if (p.mtext == 3)  // if SIGQUIT
         {
             printf("\n[%d]: Server recieves Western\n", i);
         }
     }
     printf("Main class accessed. Server was stopped.\n");
-    remove_queue(poem_id);
+    remove_queue(poem_id);  //removing queue
     return 0;
 }
 

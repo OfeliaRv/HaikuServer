@@ -1,10 +1,8 @@
-// C program to implement sighup(), sigint()
-// and sigquit() signal functions
-
 #include "poem.h"
 
 int main()
 {
+    // catching errors
     if (signal(SIGINT, signal_handler) == SIG_ERR)
     {
         printf("\ncan't catch SIGINT\n");
@@ -51,12 +49,12 @@ void signal_handler(int signal)
     if (signal == SIGINT)
     {
         printf("\nSend a SIGINT signal to server.\n");
-        write_value(poem_id, SIGINT);
+        write_value(poem_id, SIGINT);  // send signal to server
     }
     else if (signal == SIGQUIT)
     {
         printf("\nSend a SIGQUIT signal to server.\n");
-        write_value(poem_id, SIGQUIT);
+        write_value(poem_id, SIGQUIT);  // send signal to server
     }
     exit(1);
 }
