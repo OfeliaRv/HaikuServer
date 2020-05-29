@@ -13,7 +13,7 @@ int main()
     {
         int n = r2();
         int category = arr[n];
-        printf("Client sends %d: [%d] \n", i, category);
+        printf("Client sends [%d]: %d \n", i, category);
         write_value(poem_id, category);
         sleep(1);
     }
@@ -46,6 +46,6 @@ void write_value(int id, int category) // function to add message to the queue
 
 int r2()
 {
-    srand(time(NULL));
+    srand(clock());
     return (rand() % 2);
 }

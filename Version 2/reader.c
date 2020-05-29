@@ -89,12 +89,12 @@ void read_haiku(int category)
 
 int r6()
 {
-    srand(time(NULL));
+    srand(clock());
     return (rand() % 6);
 }
 
 int r8()
 {
-    srand(time(NULL));
+    srand(clock());
     return (rand() % 8);
 }

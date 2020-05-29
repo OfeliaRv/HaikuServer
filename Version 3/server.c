@@ -17,8 +17,6 @@ int main()
         read_haiku(2);
     }
 
-    //read_haiku(p.category);
-
     printf("Main class accessed. Server was stopped.\n");
     remove_queue(poem_id);
     return 0;

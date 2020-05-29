@@ -8,7 +8,6 @@ int main()
     for (int i = 1; i <= 100; i++)
     {
         p = read_value(poem_id);
-        // printf("Main queue read.");
 
         if (p.mtext == 2)
         {
@@ -18,7 +17,6 @@ int main()
         {
             printf("\n[%d]: Server recieves Western\n", i);
         }
-        // sleep(2);
     }
     printf("Main class accessed. Server was stopped.\n");
     remove_queue(poem_id);
